@@ -1,289 +1,167 @@
-<!DOCTYPE html>
-<html lang="ru"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Железный месяц — тренировки, вес, КБЖУ</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Учёт обходов</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600;700&display=swap">
 <style>
-:root{--bg:#eef0f4;--card:#fff;--tx:#14202b;--mut:#5d6b78;--ac:#2450f0;--ac2:#e3e9ff;--ok:#1b8f5a;--bd:#d8dde5;--hv:#14202b;--hvt:#fff;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f151b;--card:#18212a;--tx:#e9eef3;--mut:#93a1ae;--ac:#7b98ff;--ac2:#202c4d;--ok:#48c58a;--bd:#2a3642;--hv:#0a0f14;--hvt:#e9eef3}}
-:root[data-theme="dark"]{--bg:#0f151b;--card:#18212a;--tx:#e9eef3;--mut:#93a1ae;--ac:#7b98ff;--ac2:#202c4d;--ok:#48c58a;--bd:#2a3642;--hv:#0a0f14;--hvt:#e9eef3}
-*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 Barlow,system-ui,Arial,sans-serif}
-h1,h2,h3{font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif;margin:0;line-height:1.05;letter-spacing:.01em}
-header{background:var(--hv);color:var(--hvt);padding:28px 16px 18px}
-.w{max-width:960px;margin:0 auto}
-h1{font-size:clamp(38px,8vw,64px);font-weight:700}
-header p{margin:6px 0 16px;opacity:.75;max-width:60ch}
-.plates{display:flex;gap:6px;flex-wrap:wrap}
-.pl{width:26px;height:26px;border-radius:50%;border:4px solid rgba(255,255,255,.28);position:relative}
-.pl.on{background:var(--ac);border-color:#fff}
-.pl:after{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--hv)}
-.pl.on:after{background:#fff;inset:7px}
-nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--card);border-bottom:1px solid var(--bd);z-index:5;overflow-x:auto}
-nav .w{display:flex}
-nav button{flex:1;min-width:max-content;background:none;border:0;border-bottom:3px solid transparent;color:var(--mut);font:600 15px Barlow,sans-serif;padding:13px 14px;cursor:pointer}
-nav button.on{color:var(--ac);border-color:var(--ac)}
-button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
-main{padding:16px}
-section{display:none}section.on{display:block}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px;margin-bottom:14px}
-h2{font-size:30px;margin-bottom:10px}h3{font-size:22px;margin-bottom:6px}
-.g{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
-.st b{display:block;font:700 34px 'Barlow Condensed',Arial,sans-serif}
-.m{color:var(--mut);font-size:14px}
-form{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));align-items:end}
-label{font-size:13px;color:var(--mut);display:grid;gap:3px}
-input,select{font:16px Barlow,sans-serif;padding:9px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx);width:100%}
-.btn{background:var(--ac);color:#fff;border:0;border-radius:6px;padding:10px 14px;font:600 16px Barlow,sans-serif;cursor:pointer}
-:root:not([data-theme="light"]) .btn{color:#0f151b}
-.x{background:none;border:0;color:var(--mut);cursor:pointer;font-size:18px}
-.wk{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
-.wk button{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:20px;padding:7px 14px;font:600 15px Barlow,sans-serif;cursor:pointer}
-.wk button.on{background:var(--ac);border-color:var(--ac);color:#fff}
-.ex{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--bd)}
-.ex b{font-weight:600}.sc{font:700 20px 'Barlow Condensed',Arial,sans-serif;white-space:nowrap;color:var(--ac)}
-.done{display:flex;gap:8px;align-items:center;margin-top:10px;font-weight:600}
-.done input{width:22px;height:22px}
-.bar{height:10px;background:var(--bd);border-radius:5px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
-.bar.over i{background:#d9822b}
-.row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:6px 0;border-top:1px solid var(--bd);font-size:15px}
-.ch{width:100%;height:auto}.t{fill:var(--mut);font-size:12px}
-table{width:100%;border-collapse:collapse;font-size:15px}td,th{text-align:left;padding:6px 4px;border-top:1px solid var(--bd)}
-.up{color:var(--ok);font-weight:600}
-a{color:var(--ac)}
-footer{padding:10px 16px 30px;color:var(--mut);font-size:13px}
-</style></head><body>
-<header><div class="w"><h1>Железный месяц</h1>
-<p>Программа на похудение и рост силы: 3 тренировки в неделю по 60 минут. Отмечайте тренировки, вес, мышцы, рабочие веса и питание.</p>
-<div class="plates" id="plates" aria-label="Выполнено тренировок"></div></div></header>
-<nav><div class="w" id="nav"></div></nav>
-<main><div class="w">
-
-<section id="s-home">
-<div class="g" id="stats"></div>
-<div class="card" style="margin-top:14px"><h2>Моя цель</h2><form id="fgl">
-<label>Начальный вес, кг<input type="number" id="gS" step="0.1" min="30" required></label>
-<label>Цель, кг<input type="number" id="gT" step="0.1" min="30" required></label>
-<label>Темп, кг в неделю<select id="gP"><option>0.25</option><option>0.5</option><option>0.75</option><option>1</option></select></label>
-<button class="btn">Сохранить цель</button></form>
-<p class="m">Безопасный темп — 0,5–1 кг в неделю. Текущий вес берётся из последней записи во вкладке «Вес и тело».</p>
-<div id="gp" style="margin-top:8px"></div></div>
-<div class="card" style="margin-top:14px"><h2>Как устроена программа</h2>
-<p>Три тренировки в неделю (например, пн / ср / пт) по 60 минут: разминка 8 мин, силовая часть около 40 мин, кардио 12 мин. На каждую группу мышц — 1–2 упражнения. Четыре недели: адаптация, база, нагрузка, тест силы.</p>
-<p class="m">Правила прогрессии: если сделали все повторы с запасом 2 повтора — в следующий раз добавьте 2,5–5 % веса. Отдых между подходами 60–120 с. Перед стартом желательно проконсультироваться с врачом.</p></div>
-<div class="card"><h2>Источники</h2><ul>
-<li><a href="https://exrx.net" target="_blank" rel="noopener">ExRx.net</a> — каталог упражнений и техника</li>
-<li><a href="https://wger.de" target="_blank" rel="noopener">wger</a> — открытая база упражнений</li>
-<li><a href="https://www.who.int/news-room/fact-sheets/detail/physical-activity" target="_blank" rel="noopener">ВОЗ: физическая активность</a> — рекомендации по нагрузке</li>
-<li><a href="https://en.wikipedia.org/wiki/Basal_metabolic_rate" target="_blank" rel="noopener">Формула Миффлина — Сан-Жеора</a> — расчёт калорий</li>
-<li><a href="https://en.wikipedia.org/wiki/One-repetition_maximum" target="_blank" rel="noopener">Формула Эпли</a> — расчёт расчётного максимума</li></ul></div>
+:root{--bg:#F4F6F8;--ink:#17212B;--mut:#5B6B7A;--line:#E3E8ED;--pri:#1F4E78;--rbg:#FBE0DC;--rfg:#9C2A1E;--gbg:#DDF3E4;--gfg:#1E6B3A;--ybg:#FFF1C9;--yfg:#7A5A00}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Onest,Arial,sans-serif;font-size:15px}
+header{background:var(--pri);color:#fff;padding:16px 32px;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
+header b{font-size:20px}
+nav{display:flex;flex-wrap:wrap;gap:6px}
+nav button{background:none;border:0;color:#C9DDF0;font:inherit;padding:8px 12px;cursor:pointer;border-bottom:2px solid transparent}
+nav button.on{color:#fff;font-weight:700;border-color:#fff}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #7FB2E5;outline-offset:1px}
+main{max-width:1320px;margin:0 auto;padding:24px 32px}
+.cards{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:24px}
+.card{flex:1 1 160px;border-radius:12px;padding:16px 20px}
+.card b{display:block;font-size:32px}
+.row{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.panel{background:#fff;border:1px solid var(--line);border-radius:12px}
+.pad{padding:20px}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:16px 20px}
+h2{margin:0;font-size:18px}
+input,select,textarea{font:inherit;font-size:15px;padding:10px 12px;border:1px solid #C9D2DB;border-radius:8px;background:#fff;color:var(--ink)}
+.f label{display:block;margin-bottom:14px;font-size:13px;color:var(--mut)}
+.f input,.f select{display:block;width:100%;margin-top:6px}
+.btn{min-height:44px;border:0;border-radius:8px;background:var(--pri);color:#fff;font:inherit;font-weight:700;padding:0 18px;cursor:pointer}
+.btn.l{background:#E3ECF5;color:var(--pri)}
+.btn.s{min-height:34px;padding:0 12px;font-size:13px}
+.btn.d{background:var(--rbg);color:var(--rfg)}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th{text-align:left;padding:12px 14px;font-size:13px;color:var(--mut);font-weight:600;background:var(--bg);white-space:nowrap}
+td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:middle}
+.st{display:inline-block;padding:4px 10px;border-radius:6px;font-size:13px;font-weight:700;white-space:nowrap}
+.r{background:var(--rbg);color:var(--rfg)}.g{background:var(--gbg);color:var(--gfg)}.y{background:var(--ybg);color:var(--yfg)}.b{background:#E3ECF5;color:var(--pri)}
+.chip{display:inline-block;margin:2px 4px 2px 0;padding:2px 8px;border-radius:999px;background:#E8EDF2;color:#33414F;font-size:12px}
+.msg{padding:10px 12px;border-radius:8px;font-size:13px;margin-bottom:16px}
+.hide{display:none}
+.mut{color:var(--mut);font-size:13px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#17212B;color:#fff;padding:12px 18px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+@media(max-width:700px){header,main{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+<header><b>Учёт обходов</b>
+<nav id="nav"><button data-v="addr" class="on">Адреса</button><button data-v="log">Журнал</button><button data-v="hunt">Хантеры</button><button data-v="set">Настройки</button></nav></header>
+<main>
+<section id="v-addr">
+<div class="cards" id="cards"></div>
+<div class="row">
+<div class="panel" style="flex:3 1 600px;min-width:0">
+<div class="tools"><h2>Адреса</h2><div style="display:flex;flex-wrap:wrap;gap:10px">
+<input id="q" placeholder="Поиск по адресу" aria-label="Поиск по адресу">
+<select id="fh" aria-label="Фильтр по хантеру"></select>
+<select id="fs" aria-label="Фильтр по статусу"><option value="">Все статусы</option><option value="r">Рано</option><option value="g">Можно отправлять</option><option value="y">Новый</option></select></div></div>
+<div class="tw"><table><thead><tr><th>Адрес</th><th>Последний обход</th><th>Кто был последним</th><th>Дней назад</th><th>Статус</th><th>Уже были</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+<div class="pad mut" id="cnt"></div>
+</div>
+<aside class="panel pad f" style="flex:1 1 320px">
+<h2 style="margin-bottom:16px">Записать обход</h2>
+<label>Дата<input type="date" id="fd"></label>
+<label>Адрес<select id="fa"></select></label>
+<label>Хантер<select id="fhh"></select></label>
+<label>Результат (по желанию)<input id="fr"></label>
+<div id="warn" class="msg hide"></div>
+<button class="btn" id="save" style="width:100%">Сохранить обход</button>
+</aside>
+</div>
 </section>
-
-<section id="s-plan"><h2>План на месяц</h2><div class="wk" id="wk"></div><div id="days"></div></section>
-
-<section id="s-str"><h2>Силовые показатели</h2>
-<div class="card"><form id="fs">
-<label>Упражнение<select id="se"></select></label>
-<label>Дата<input type="date" id="sd" required></label>
-<label>Вес, кг<input type="number" id="sw" step="0.5" min="0" required></label>
-<label>Повторы<input type="number" id="sr" min="1" max="30" required></label>
-<button class="btn">Записать</button></form>
-<p class="m">Расчётный максимум на 1 повтор считается по формуле Эпли: вес × (1 + повторы / 30).</p></div>
-<div class="card"><h3 id="sh"></h3><div id="sc"></div></div>
-<div class="card"><h3>Рекорды</h3><div id="sr2"></div></div></section>
-
-<section id="s-body"><h2>Вес и состав тела</h2>
-<div class="card"><form id="fb">
-<label>Дата<input type="date" id="bd" required></label>
-<label>Вес, кг<input type="number" id="bw" step="0.1" required></label>
-<label>Мышечная масса, кг<input type="number" id="bm" step="0.1"></label>
-<label>Талия, см<input type="number" id="bt" step="0.5"></label>
-<button class="btn">Записать</button></form></div>
-<div class="card"><h3>Вес</h3><div id="c1"></div></div>
-<div class="card"><h3>Мышечная масса</h3><div id="c2"></div></div>
-<div class="card"><h3>Записи</h3><div id="bl"></div></div></section>
-
-<section id="s-food"><h2>КБЖУ</h2>
-<div class="card"><h3>Ваши данные и норма</h3><form id="fp">
-<label>Пол<select id="pS"><option value="m">Мужской</option><option value="f">Женский</option></select></label>
-<label>Возраст<input type="number" id="pA" min="14" max="90"></label>
-<label>Рост, см<input type="number" id="pH"></label>
-<label>Активность вне тренировок<select id="pC"><option value="1.375">Сидячая работа</option><option value="1.55">Умеренная</option><option value="1.725">Высокая</option></select></label>
-</form><div id="tg" class="m" style="margin-top:10px"></div></div>
-<div class="card"><h3>Дневник питания</h3><form id="ff">
-<label>Дата<input type="date" id="fd" required></label>
-<label>Продукт (начните вводить)<input id="fn" list="fdb" required autocomplete="off"></label><datalist id="fdb"></datalist>
-<label>Масса, г<input type="number" id="fg2" value="100" min="1" required></label>
-<label>Ккал на 100 г<input type="number" id="fk" step="0.1" required></label>
-<label>Белки на 100 г<input type="number" id="fB" step="0.1" value="0"></label>
-<label>Жиры на 100 г<input type="number" id="fF" step="0.1" value="0"></label>
-<label>Углеводы на 100 г<input type="number" id="fC" step="0.1" value="0"></label>
-<button class="btn">Добавить</button></form><p class="m" id="fpv" style="margin-top:8px"></p>
-<div id="fs2" style="margin-top:12px"></div><div id="fl"></div></div>
-<div class="card"><h3>Что есть, чтобы похудеть</h3><p class="m">Пример дня под вашу норму: граммы пересчитаны автоматически. Продукты можно менять на похожие.</p><div id="menu"></div>
-<p><b>Белок:</b> куриная грудка, индейка, рыба, яйца, творог 0–5 %, греческий йогурт.<br><b>Сложные углеводы:</b> гречка, овсянка, бурый рис, чечевица, цельнозерновой хлеб.<br><b>Овощи:</b> 400 г и больше в день — брокколи, огурцы, капуста, шпинат.<br><b>Жиры:</b> оливковое масло, орехи, авокадо, жирная рыба — небольшими порциями.<br><b>Ограничить:</b> сладкие напитки, сахар, выпечку, фастфуд, алкоголь. Воды — около 30 мл на кг веса.</p></div></section>
-
-</div></main>
-<footer><div class="w">Данные хранятся только в этом браузере. Расчёты ориентировочные и не заменяют консультацию врача или тренера.</div></footer>
-
+<section id="v-log" class="hide"><div class="panel"><div class="tools"><h2>Журнал обходов</h2><button class="btn l s" id="csv">Скачать в Excel (CSV)</button></div>
+<div class="tw"><table><thead><tr><th>Дата</th><th>Адрес</th><th>Хантер</th><th>Результат</th><th></th></tr></thead><tbody id="lb"></tbody></table></div></div></section>
+<section id="v-hunt" class="hide"><div class="panel pad" style="max-width:640px"><h2 style="margin-bottom:14px">Хантеры</h2>
+<div style="display:flex;gap:10px;margin-bottom:16px"><input id="nh" placeholder="ФИО нового хантера" style="flex:1" aria-label="ФИО нового хантера"><button class="btn" id="ah">Добавить</button></div>
+<div id="hl"></div></div></section>
+<section id="v-set" class="hide"><div class="row">
+<div class="panel pad f" style="flex:1 1 340px"><h2 style="margin-bottom:16px">Настройки</h2>
+<label>Через сколько дней можно снова отправлять на адрес<input type="number" id="iv" min="1" max="365"></label>
+<label>Добавить адреса (каждый с новой строки)<textarea id="na" rows="4" style="width:100%;margin-top:6px"></textarea></label>
+<button class="btn" id="aa">Добавить адреса</button>
+<div style="margin-top:20px"><div class="mut" style="margin-bottom:6px">Удалить адрес</div><select id="da" style="width:100%"></select><button class="btn d s" id="dab" style="margin-top:10px">Удалить выбранный адрес</button></div></div>
+<div class="panel pad" style="flex:1 1 340px"><h2 style="margin-bottom:12px">Данные</h2>
+<p class="mut">Данные хранятся в этом браузере на этом устройстве. Делайте копию, чтобы не потерять.</p>
+<p><b>Загрузить из Excel</b><br><span class="mut">Колонки «ФИО хантеров» и «Адреса» (как в файле ЦАП_УКА). Новые добавятся к уже имеющимся.</span></p>
+<input type="file" id="xl" accept=".xlsx,.xls" aria-label="Файл Excel">
+<p style="margin-top:20px"><b>Резервная копия</b></p>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn l" id="ex">Скачать копию</button><label class="btn l" style="display:inline-flex;align-items:center;cursor:pointer;margin:0;font-size:15px;color:var(--pri)">Восстановить из копии<input type="file" id="im" accept=".json" class="hide"></label></div></div>
+</div></section>
+</main>
+<div id="toast" role="status"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
-const $=s=>document.querySelector(s),today=new Date().toISOString().slice(0,10);
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let S={p:{sex:"m",age:30,h:175,act:1.375},g:{s:90,t:75,p:0.75},body:[],str:[],food:[],done:{}};
-try{Object.assign(S,JSON.parse(localStorage.getItem('fp')||'{}'))}catch(e){}
-const save=()=>{try{localStorage.setItem('fp',JSON.stringify(S))}catch(e){}};
-const E={
-squat:['Присед со штангой (или гоблет-присед)','Ноги: квадрицепс','c'],
-ohp:['Жим гантелей над головой','Плечи','c'],
-lat:['Махи гантелей в стороны','Плечи: средняя дельта','a'],
-plank:['Планка','Пресс','t'],
-bench:['Жим штанги лёжа','Грудь','c'],
-pull:['Тяга верхнего блока','Спина','c'],
-curl:['Сгибания рук с гантелями','Бицепс','a'],
-tri:['Разгибания рук на блоке','Трицепс','a'],
-crunch:['Скручивания','Пресс','a'],
-rdl:['Румынская тяга','Ноги: задняя поверхность и ягодицы','c'],
-inc:['Жим гантелей на наклонной скамье','Грудь: верх','c'],
-row:['Тяга гантели в наклоне','Спина','c']};
-const D=[{k:'Пн',n:'Тренировка A: ноги и плечи',ex:['squat','ohp','lat','plank'],cd:'Велотренажёр'},
-{k:'Ср',n:'Тренировка B: грудь, спина, руки',ex:['bench','pull','curl','tri','crunch'],cd:'Быстрая ходьба в горку на дорожке'},
-{k:'Пт',n:'Тренировка C: задняя линия и жим',ex:['rdl','inc','row','plank'],cd:'Эллипс или лёгкий бег'}];
-const W=[{t:'Неделя 1: адаптация',c:'3×12',x:'усилие 6 из 10, отрабатываем технику',cd:'12 мин ровным темпом'},
-{t:'Неделя 2: база',c:'3×10',x:'усилие 7 из 10, +2,5–5 % веса',cd:'15 мин ровным темпом'},
-{t:'Неделя 3: нагрузка',c:'4×8',x:'усилие 8 из 10, запас 1–2 повтора',cd:'8 интервалов: 30 с быстро / 60 с легко'},
-{t:'Неделя 4: тест силы',c:'3×5',x:'тяжёлые подходы, запишите результаты во вкладке «Силовые»',cd:'20 мин лёгкий темп'}];
-const scheme=(w,t)=>t=='c'?W[w].c:t=='a'?'3×12–15':(w==3?'3×60 с':'3×30–45 с');
-let wk=0,tab='home',se='squat';
-
-const TABS=[['home','Обзор'],['plan','План'],['str','Силовые'],['body','Вес и тело'],['food','КБЖУ']];
-$('#nav').innerHTML=TABS.map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join('');
-$('#nav').onclick=e=>{if(e.target.dataset.t){tab=e.target.dataset.t;show()}};
-function show(){document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id=='s-'+tab));
-document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.t==tab));window.scrollTo(0,0);}
-['sd','bd','fd'].forEach(i=>$('#'+i).value=today);
-$('#se').innerHTML=Object.entries(E).filter(e=>e[1][2]!='t').map(e=>`<option value="${e[0]}">${e[1][0]}</option>`).join('');
-
-function chart(pts,u){
-if(pts.length<2)return'<p class="m">Добавьте минимум две записи, чтобы увидеть график.</p>';
-const Wd=600,H=180,p=30,ys=pts.map(a=>a.y),mn=Math.min(...ys),mx=Math.max(...ys),r=(mx-mn)||1;
-const X=i=>p+i*(Wd-2*p)/(pts.length-1),Y=y=>H-p-(y-mn)/r*(H-2*p);
-return`<svg class="ch" viewBox="0 0 ${Wd} ${H}" role="img"><polyline fill="none" stroke="var(--ac)" stroke-width="3" points="${pts.map((a,i)=>X(i)+','+Y(a.y)).join(' ')}"/>${pts.map((a,i)=>`<circle cx="${X(i)}" cy="${Y(a.y)}" r="4" fill="var(--ac)"/>`).join('')}<text class="t" x="${p}" y="14">${mx} ${u}</text><text class="t" x="${p}" y="${H-6}">${mn} ${u}</text><text class="t" x="${Wd-p}" y="${H-6}" text-anchor="end">${pts[pts.length-1].x}</text></svg>`}
-const byDate=a=>a.slice().sort((x,y)=>x.d<y.d?-1:1);
-const curW=()=>{const b=byDate(S.body);return b.length?b[b.length-1].w:S.g.s};
-const tgt=()=>{const p=S.p,w=curW(),bmr=10*w+6.25*p.h-5*p.age+(p.sex=='m'?5:-161),tdee=bmr*p.act,fl=p.sex=='m'?1500:1200,k=Math.round(Math.max(fl,tdee-S.g.p*1100)),b=Math.round(1.8*w),f=Math.round(.8*w),c=Math.max(0,Math.round((k-4*b-9*f)/4));return{k,b,f,c,tdee:Math.round(tdee),def:Math.round(tdee-k),w}};
-
-function rPlan(){
-$('#wk').innerHTML=W.map((w,i)=>`<button class="${i==wk?'on':''}" data-w="${i}">Неделя ${i+1}</button>`).join('');
-$('#days').innerHTML=`<p class="m"><b>${W[wk].t}.</b> ${W[wk].x}.</p>`+D.map((d,j)=>{const key=wk+'-'+j;
-return`<div class="card"><h3>${d.k} · ${d.n}</h3><p class="m">Разминка 8 мин (суставная гимнастика, лёгкие подходы) → силовая часть ~40 мин → кардио 12 мин</p>
-${d.ex.map(id=>`<div class="ex"><div><b>${E[id][0]}</b><br><span class="m">${E[id][1]}</span></div><div class="sc">${scheme(wk,E[id][2])}</div></div>`).join('')}
-<div class="ex"><div><b>Кардио: ${d.cd}</b><br><span class="m">${W[wk].cd}</span></div><div class="sc">12 мин</div></div>
-<label class="done" style="flex-direction:row;color:var(--tx);font-size:16px"><input type="checkbox" data-k="${key}" ${S.done[key]?'checked':''}>Тренировка выполнена</label></div>`}).join('')}
-$('#wk').onclick=e=>{if(e.target.dataset.w!=null){wk=+e.target.dataset.w;rPlan()}};
-$('#days').onchange=e=>{if(e.target.dataset.k){S.done[e.target.dataset.k]=e.target.checked;save();rHome()}};
-
-function rHome(){rHome0();rGoal();rFood()}
-function rHome0(){
-const n=Object.values(S.done).filter(Boolean).length;
-$('#plates').innerHTML=Array.from({length:12},(_,i)=>`<div class="pl ${i<n?'on':''}"></div>`).join('');
-const b=byDate(S.body),f=b[0],l=b[b.length-1],t=tgt(),kc=S.food.filter(x=>x.d==today).reduce((a,x)=>a+x.k,0);
-const dv=(a,u)=>a==null?'—':(a>0?'+':'')+a.toFixed(1)+' '+u;
-const dw=b.length?l.w-S.g.s:null,mm=b.filter(x=>x.m);const dm=mm.length>1?mm[mm.length-1].m-mm[0].m:null;
-$('#stats').innerHTML=[['Тренировок',n+' из 12'],['Вес сейчас',curW()+' кг'],['Изменение веса',dv(dw,'кг')],['Мышцы',dv(dm,'кг')],['Ккал сегодня',kc+' / '+t.k]].map(s=>`<div class="card st" style="margin:0"><span class="m">${s[0]}</span><b>${s[1]}</b></div>`).join('')}
-
-function rStr(){se=$('#se').value||se;
-const rows=byDate(S.str.filter(x=>x.e==se));
-$('#sh').textContent=E[se][0]+': расчётный максимум';
-$('#sc').innerHTML=chart(rows.map(r=>({x:r.d,y:r.rm})),'кг')+(rows.length?`<table>${rows.slice().reverse().slice(0,8).map(r=>`<tr><td>${r.d}</td><td>${r.w} кг × ${r.r}</td><td>≈ ${r.rm} кг</td><td><button class="x" data-i="${r.id}" aria-label="Удалить">✕</button></td></tr>`).join('')}</table>`:'');
-const ids=[...new Set(S.str.map(x=>x.e))];
-$('#sr2').innerHTML=ids.length?`<table><tr><th>Упражнение</th><th>Лучший макс.</th><th>Рост</th></tr>${ids.map(id=>{const r=byDate(S.str.filter(x=>x.e==id)),best=Math.max(...r.map(x=>x.rm)),g=best-r[0].rm;return`<tr><td>${E[id][0]}</td><td>${best} кг</td><td class="${g>0?'up':''}">${g>0?'+':''}${g.toFixed(1)} кг</td></tr>`}).join('')}</table>`:'<p class="m">Пока нет записей. Добавьте первый подход выше.</p>'}
-$('#se').onchange=rStr;
-$('#fs').onsubmit=e=>{e.preventDefault();const w=+$('#sw').value,r=+$('#sr').value;
-S.str.push({id:Date.now(),e:$('#se').value,d:$('#sd').value,w,r,rm:Math.round(w*(1+r/30)*10)/10});save();rStr();rHome();$('#sw').value='';$('#sr').value=''};
-$('#sc').onclick=e=>{if(e.target.dataset.i){S.str=S.str.filter(x=>x.id!=e.target.dataset.i);save();rStr()}};
-
-function rBody(){const b=byDate(S.body);
-$('#c1').innerHTML=chart(b.map(x=>({x:x.d,y:x.w})),'кг');
-$('#c2').innerHTML=chart(b.filter(x=>x.m).map(x=>({x:x.d,y:x.m})),'кг');
-$('#bl').innerHTML=b.length?`<table><tr><th>Дата</th><th>Вес</th><th>Мышцы</th><th>Талия</th><th></th></tr>${b.slice().reverse().map(x=>`<tr><td>${x.d}</td><td>${x.w}</td><td>${x.m||'—'}</td><td>${x.t||'—'}</td><td><button class="x" data-i="${x.id}" aria-label="Удалить">✕</button></td></tr>`).join('')}</table>`:'<p class="m">Записей нет. Внесите стартовый вес.</p>'}
-$('#fb').onsubmit=e=>{e.preventDefault();S.body.push({id:Date.now(),d:$('#bd').value,w:+$('#bw').value,m:+$('#bm').value||0,t:+$('#bt').value||0});save();rBody();rHome();$('#bw').value='';$('#bm').value='';$('#bt').value=''};
-$('#bl').onclick=e=>{if(e.target.dataset.i){S.body=S.body.filter(x=>x.id!=e.target.dataset.i);save();rBody();rHome()}};
-
-function rFood(){const t=tgt(),d=$('#fd').value,L=S.food.filter(x=>x.d==d);
-const s=k=>Math.round(L.reduce((a,x)=>a+x[k],0)*10)/10;
-const bar=(n,v,g,u)=>`<div class="row"><div>${n}: <b>${v}</b> из ${g} ${u}<div class="bar ${v>g?'over':''}"><i style="width:${Math.min(100,v/(g||1)*100)}%"></i></div></div><span class="m">${Math.max(0,Math.round(g-v))} осталось</span></div>`;
-$('#tg').innerHTML=`Вес для расчёта: <b>${t.w} кг</b> (последнее взвешивание). Обмен веществ с учётом активности ≈ ${t.tdee} ккал, дефицит ${t.def} ккал в день. Норма: <b>${t.k} ккал</b>, белки ${t.b} г, жиры ${t.f} г, углеводы ${t.c} г.`;rMenu();
-$('#fs2').innerHTML=bar('Калории',s('k'),t.k,'ккал')+bar('Белки',s('b'),t.b,'г')+bar('Жиры',s('f'),t.f,'г')+bar('Углеводы',s('c'),t.c,'г');
-$('#fl').innerHTML=L.length?L.map(x=>`<div class="row"><div>${esc(x.n)} <span class="m">${x.k} ккал · Б ${x.b} · Ж ${x.f} · У ${x.c}</span></div><button class="x" data-i="${x.id}" aria-label="Удалить">✕</button></div>`).join(''):'<p class="m">За этот день продуктов нет.</p>'}
-$('#fd').onchange=rFood;
-$('#ff').onsubmit=e=>{e.preventDefault();const g=+$('#fg2').value,m=g/100,r=v=>r1(v*m);S.food.push({id:Date.now(),d:$('#fd').value,n:$('#fn').value+', '+g+' г',k:Math.round($('#fk').value*m),b:r($('#fB').value),f:r($('#fF').value),c:r($('#fC').value)});save();rFood();rHome();$('#fn').value='';$('#fk').value='';$('#fg2').value=100;pv()};
-$('#fl').onclick=e=>{if(e.target.dataset.i){S.food=S.food.filter(x=>x.id!=e.target.dataset.i);save();rFood();rHome()}};
-function pf(){const p=S.p;$("#pS").value=p.sex;$("#pA").value=p.age;$("#pH").value=p.h;$("#pC").value=p.act}
-$('#fp').onsubmit=e=>e.preventDefault();
-$('#fp').oninput=()=>{const a=+$('#pA').value,h=+$('#pH').value;if(a>0&&h>0){S.p={sex:$('#pS').value,age:a,h,act:+$('#pC').value};save();rHome()}};
-function gf(){$('#gS').value=S.g.s;$('#gT').value=S.g.t;$('#gP').value=S.g.p}
-const upG=()=>{const s=+$('#gS').value,t=+$('#gT').value,p=+$('#gP').value;if(s>0&&t>0&&p>0){S.g={s,t,p};save();rHome()}};
-$('#fgl').oninput=upG;$('#fgl').onsubmit=e=>{e.preventDefault();upG()};
-function rGoal(){const g=S.g,w=curW(),tot=g.s-g.t,done=g.s-w,pc=tot>0?Math.max(0,Math.min(100,done/tot*100)):0,left=w-g.t,wks=left>0?Math.ceil(left/g.p):0,dt=new Date(Date.now()+wks*7*864e5).toISOString().slice(0,10),t=tgt();
-$('#gp').innerHTML=`<div class="bar"><i style="width:${pc}%"></i></div><p>Сброшено <b>${Math.max(0,done).toFixed(1)}</b> из ${Math.max(0,tot).toFixed(1)} кг (${Math.round(pc)} %). ${left>0?`Осталось <b>${left.toFixed(1)} кг</b>, примерно ${wks} нед. — к ${dt}.`:'Цель достигнута.'}</p><p class="m">Для темпа ${g.p} кг в неделю нужно есть около <b>${t.k} ккал</b> в день: белки ${t.b} г, жиры ${t.f} г, углеводы ${t.c} г.</p>`}
-const FD=`Куриная грудка варёная|137|29.8|1.8|0
-Индейка (филе)|114|23.6|1.5|0
-Говядина постная варёная|190|29|8|0
-Свинина (вырезка)|143|21|6|0
-Треска запечённая|105|23|0.9|0
-Лосось|208|20|13|0
-Тунец в собственном соку|116|26|1|0
-Яйцо куриное|157|12.7|11.5|0.7
-Яичный белок|52|11|0.2|0.7
-Творог 0–1 %|71|16|0.6|1.3
-Творог 5 %|121|17|5|1.8
-Греческий йогурт 0 %|57|10|0.4|3.6
-Йогурт натуральный 2 %|60|5|2|4
-Кефир 1 %|40|3|1|4
-Молоко 2,5 %|52|2.8|2.5|4.7
-Сыр твёрдый|350|25|27|0
-Протеин сывороточный|380|80|5|6
-Гречка варёная|110|4.2|1.1|21
-Рис варёный|130|2.7|0.3|28
-Овсяные хлопья (сухие)|366|12|6|60
-Овсянка на воде|71|2.5|1.5|12
-Макароны варёные|158|5.8|0.9|31
-Картофель варёный|82|2|0.4|17
-Батат запечённый|90|2|0.2|21
-Хлеб цельнозерновой|250|10|3|43
-Чечевица варёная|116|9|0.4|20
-Нут варёный|164|8.9|2.6|27
-Фасоль красная варёная|127|8.7|0.5|22.8
-Огурец|15|0.8|0.1|2.8
-Помидор|20|1.1|0.2|3.7
-Брокколи|34|2.8|0.4|6.6
-Капуста белая|28|1.8|0.2|4.7
-Морковь|35|1.3|0.1|6.9
-Болгарский перец|27|1.3|0.1|5.3
-Шпинат|23|2.9|0.4|3.6
-Кабачок|24|0.6|0.3|4.6
-Яблоко|52|0.3|0.2|13.8
-Банан|96|1.5|0.5|21
-Апельсин|47|0.9|0.1|11.8
-Клубника|32|0.7|0.3|7.7
-Груша|57|0.4|0.1|15
-Авокадо|160|2|14.7|8.5
-Миндаль|579|21|50|22
-Арахисовая паста|588|25|50|20
-Оливковое масло|884|0|100|0
-Сливочное масло|748|0.5|82.5|0.8
-Сахар|399|0|0|100
-Мёд|304|0.3|0|82
-Тёмный шоколад 70 %|598|7.8|43|46`.split('\n').map(l=>{const a=l.split('|');return{n:a[0],k:+a[1],b:+a[2],f:+a[3],c:+a[4]}});
-$('#fdb').innerHTML=FD.map(x=>`<option value="${x.n}">`).join('');
-const r1=v=>Math.round(v*10)/10;
-function pv(){const m=(+$('#fg2').value||0)/100,k=+$('#fk').value||0;$('#fpv').innerHTML=k?`Итого: <b>${Math.round(k*m)} ккал</b> · Б ${r1($('#fB').value*m)} · Ж ${r1($('#fF').value*m)} · У ${r1($('#fC').value*m)}`:'Выберите продукт из списка: значения подставятся сами. Нет в списке — введите данные на 100 г с упаковки.'}
-$('#fn').oninput=()=>{const x=FD.find(p=>p.n==$('#fn').value);if(x){$('#fk').value=x.k;$('#fB').value=x.b;$('#fF').value=x.f;$('#fC').value=x.c}pv()};
-['fg2','fk','fB','fF','fC'].forEach(i=>$('#'+i).oninput=pv);
-const MT=[['Завтрак',[['Овсяные хлопья (сухие)',60],['Яйцо куриное',100],['Банан',100]]],['Обед',[['Куриная грудка варёная',150],['Гречка варёная',200],['Огурец',100],['Помидор',100],['Оливковое масло',10]]],['Перекус',[['Творог 0–1 %',200],['Яблоко',150]]],['Ужин',[['Треска запечённая',200],['Брокколи',200],['Рис варёный',150],['Оливковое масло',5]]]];
-function rMenu(){const t=tgt(),F=n=>FD.find(x=>x.n==n),all=MT.flatMap(m=>m[1]),bk=all.reduce((a,[n,g])=>a+F(n).k*g/100,0),sc=t.k/bk,T={k:0,b:0,f:0,c:0};
-$('#menu').innerHTML=MT.map(([m,L])=>`<div class="ex"><div><b>${m}</b><br><span class="m">${L.map(([n,g])=>{const gr=Math.max(5,Math.round(g*sc/5)*5),x=F(n);T.k+=x.k*gr/100;T.b+=x.b*gr/100;T.f+=x.f*gr/100;T.c+=x.c*gr/100;return n+' — '+gr+' г'}).join('<br>')}</span></div></div>`).join('')+`<p class="m">Итого ≈ ${Math.round(T.k)} ккал · Б ${Math.round(T.b)} · Ж ${Math.round(T.f)} · У ${Math.round(T.c)} (норма: ${t.k} ккал, Б ${t.b}, Ж ${t.f}, У ${t.c}). Если белка не хватает, добавьте творог, яичные белки или протеин.</p>`}
-
-pf();gf();rPlan();rHome();rStr();rBody();pv();show();
-</script></body></html>
+const KEY='obhody.v1';
+let S=load();
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.log))return s}catch(e){}return{addrs:[],hunters:[],log:[],interval:14}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast('Не удалось сохранить в браузере')}}
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ymd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const today=()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())};
+const fmt=s=>s?s.split('-').reverse().join('.'):'—';
+const dd=s=>Math.round((today()-new Date(s+'T00:00:00'))/864e5);
+const addDays=(s,n)=>{const d=new Date(s+'T00:00:00');d.setDate(d.getDate()+n);return ymd(d)};
+let tt;function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2600)}
+function info(a){const L=S.log.filter(e=>e.addr===a).sort((x,y)=>y.date.localeCompare(x.date)||y.id-x.id);
+ if(!L.length)return{last:null,days:null,st:'y',hunters:[]};
+ const days=dd(L[0].date);return{last:L[0],days,st:days<S.interval?'r':'g',hunters:[...new Set(L.map(e=>e.hunter))]}}
+const ST={r:'Рано',g:'Можно отправлять',y:'Новый'};
+function opts(arr,first){return (first?'<option value="">'+first+'</option>':'')+arr.map(x=>'<option>'+esc(x)+'</option>').join('')}
+function fillSelects(){
+ const keep=[$('fh').value,$('fa').value,$('fhh').value];
+ $('fh').innerHTML=opts(S.hunters,'Все хантеры');$('fa').innerHTML=opts(S.addrs,S.addrs.length?'Выберите адрес':'Сначала добавьте адреса');$('fhh').innerHTML=opts(S.hunters,S.hunters.length?'Выберите хантера':'Сначала добавьте хантеров');$('da').innerHTML=opts(S.addrs,'Выберите адрес');
+ $('fh').value=keep[0];$('fa').value=keep[1];$('fhh').value=keep[2]}
+function renderAddr(){
+ const all=S.addrs.map(a=>({a,i:info(a)}));
+ const n=k=>all.filter(x=>x.i.st===k).length;
+ $('cards').innerHTML=`<div class="card r"><b>${n('r')}</b>Рано: срок ещё не прошёл</div><div class="card g"><b>${n('g')}</b>Можно отправлять</div><div class="card y"><b>${n('y')}</b>Новые: там ещё не были</div><div class="card b"><b>${S.interval} дн.</b>Интервал между обходами</div>`;
+ const q=$('q').value.trim().toLowerCase(),h=$('fh').value,s=$('fs').value;
+ const rows=all.filter(x=>(!q||x.a.toLowerCase().includes(q))&&(!h||x.i.hunters.includes(h))&&(!s||x.i.st===s));
+ $('tb').innerHTML=rows.map(({a,i})=>`<tr><td><b>${esc(a)}</b></td><td>${fmt(i.last&&i.last.date)}</td><td>${i.last?esc(i.last.hunter):'—'}</td><td>${i.days===null?'—':i.days}</td><td><span class="st ${i.st}">${ST[i.st]}</span></td><td>${i.hunters.map(x=>'<span class="chip">'+esc(x.split(' ')[0])+'</span>').join('')||'<span class="mut">никто</span>'}</td><td><button class="btn l s" data-a="${esc(a)}">Записать</button></td></tr>`).join('')||'<tr><td colspan="7" class="mut">'+(S.addrs.length?'Ничего не найдено':'Адресов пока нет. Загрузите Excel или добавьте адреса в «Настройках».')+'</td></tr>';
+ $('cnt').textContent='Показано '+rows.length+' из '+all.length+' адресов';
+ check()}
+function check(){
+ const a=$('fa').value,h=$('fhh').value,w=$('warn');w.className='msg hide';if(!a)return;
+ const i=info(a);
+ if(h&&i.hunters.includes(h)){w.className='msg r';w.textContent=h+' уже был на этом адресе. Лучше отправить другого хантера.';return}
+ if(i.last&&i.st==='r'){w.className='msg r';w.textContent='На этом адресе были '+fmt(i.last.date)+' ('+i.last.hunter+'). Следующий обход возможен с '+fmt(addDays(i.last.date,S.interval))+'.';return}
+ if(i.last){w.className='msg g';w.textContent='Можно отправлять. Последний обход: '+fmt(i.last.date)+'.'}else{w.className='msg y';w.textContent='На этом адресе ещё не были.'}}
+function renderLog(){
+ $('lb').innerHTML=[...S.log].sort((x,y)=>y.date.localeCompare(x.date)||y.id-x.id).map(e=>`<tr><td>${fmt(e.date)}</td><td>${esc(e.addr)}</td><td>${esc(e.hunter)}</td><td>${esc(e.res||'')}</td><td><button class="btn d s" data-del="${e.id}">Удалить</button></td></tr>`).join('')||'<tr><td colspan="5" class="mut">Обходов пока нет</td></tr>'}
+function renderHunt(){
+ $('hl').innerHTML=S.hunters.map((h,k)=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--line)"><span>${esc(h)} <span class="mut">· обходов: ${S.log.filter(e=>e.hunter===h).length}</span></span><button class="btn d s" data-dh="${k}">Убрать</button></div>`).join('')||'<p class="mut">Хантеров пока нет</p>'}
+function all(){fillSelects();renderAddr();renderLog();renderHunt();$('iv').value=S.interval}
+$('nav').onclick=e=>{const v=e.target.dataset.v;if(!v)return;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b===e.target));['addr','log','hunt','set'].forEach(k=>$('v-'+k).classList.toggle('hide',k!==v))};
+['q','fh','fs'].forEach(id=>$(id).oninput=renderAddr);
+$('fa').onchange=$('fhh').onchange=check;
+$('tb').onclick=e=>{const a=e.target.dataset.a;if(a===undefined)return;$('fa').value=a;check();$('fhh').focus()};
+$('save').onclick=()=>{const d=$('fd').value,a=$('fa').value,h=$('fhh').value;
+ if(!d||!a||!h){toast('Заполните дату, адрес и хантера');return}
+ S.log.push({id:Date.now(),date:d,addr:a,hunter:h,res:$('fr').value.trim()});save();$('fr').value='';$('fa').value='';all();toast('Обход записан')};
+$('lb').onclick=e=>{const id=e.target.dataset.del;if(!id||!confirm('Удалить эту запись?'))return;S.log=S.log.filter(x=>String(x.id)!==id);save();all()};
+$('ah').onclick=()=>{const v=$('nh').value.trim();if(!v)return;if(!S.hunters.includes(v))S.hunters.push(v);$('nh').value='';save();all()};
+$('hl').onclick=e=>{const k=e.target.dataset.dh;if(k===undefined||!confirm('Убрать хантера из списка? Его обходы в журнале останутся.'))return;S.hunters.splice(+k,1);save();all()};
+$('iv').onchange=()=>{const n=parseInt($('iv').value,10);if(n>0){S.interval=n;save();all();toast('Интервал сохранён')}};
+$('aa').onclick=()=>{$('na').value.split('\n').map(x=>x.trim()).filter(Boolean).forEach(a=>{if(!S.addrs.includes(a))S.addrs.push(a)});$('na').value='';save();all();toast('Адреса добавлены')};
+$('dab').onclick=()=>{const a=$('da').value;if(!a||!confirm('Удалить адрес «'+a+'»? Записи в журнале останутся.'))return;S.addrs=S.addrs.filter(x=>x!==a);save();all()};
+$('xl').onchange=async e=>{const f=e.target.files[0];if(!f)return;
+ if(!window.XLSX){toast('Библиотека Excel не загрузилась. Проверьте интернет');return}
+ try{const wb=XLSX.read(await f.arrayBuffer());const rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:''});
+ let hc=-1,ac=-1;(rows[0]||[]).forEach((h,i)=>{h=String(h).toLowerCase();if(h.includes('фио')||h.includes('хантер'))hc=i;if(h.includes('адрес'))ac=i});
+ if(hc<0)hc=1;if(ac<0)ac=2;let nh=0,na=0;
+ rows.slice(1).forEach(r=>{const h=String(r[hc]||'').trim(),a=String(r[ac]||'').trim();if(h&&!S.hunters.includes(h)){S.hunters.push(h);nh++}if(a&&!S.addrs.includes(a)){S.addrs.push(a);na++}});
+ save();all();toast('Добавлено: адресов '+na+', хантеров '+nh)}catch(err){toast('Не удалось прочитать файл')}
+ e.target.value=''};
+function dl(name,text,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+$('ex').onclick=()=>dl('obhody-kopiya-'+ymd(today())+'.json',JSON.stringify(S),'application/json');
+$('im').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const s=JSON.parse(await f.text());if(!Array.isArray(s.log)||!Array.isArray(s.addrs)||!Array.isArray(s.hunters))throw 0;if(!confirm('Заменить текущие данные данными из копии?'))return;S={addrs:s.addrs,hunters:s.hunters,log:s.log,interval:s.interval>0?s.interval:14};save();all();toast('Данные восстановлены')}catch(err){toast('Это не файл копии')}e.target.value=''};
+$('csv').onclick=()=>{const q=v=>'"'+String(v||'').replace(/"/g,'""')+'"';const t=['Дата;Адрес;Хантер;Результат'].concat([...S.log].sort((x,y)=>y.date.localeCompare(x.date)).map(e=>[fmt(e.date),q(e.addr),q(e.hunter),q(e.res)].join(';'))).join('\r\n');dl('zhurnal-obhodov.csv','\ufeff'+t,'text/csv;charset=utf-8')};
+$('fd').value=ymd(today());
+all();
+</script>
+</body>
+</html>
